@@ -1,0 +1,21 @@
+<form >
+    <div class="card">
+        <h3 id="sgn-up">Sign-Up</h3>
+        <div>
+            <select class="form-labels" [(ngModel)]="selectedRole" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let role of roles" [value]="role"> {{role}}</option>
+            </select>
+        </div>
+        <div>
+            <input class="form-labels" type="email" required placeholder="Enter your email" >
+        </div>
+        <div>
+            <input class="form-labels" type="password" required placeholder="Enter your password">
+        </div>
+        <div>
+            <button class="submt" type="submit">Add user</button>
+        </div>
+        <a class="lnk" href="#">Already have an account? Sign-in</a>
+        
+    </div>
+</form>
