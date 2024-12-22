@@ -1,0 +1,80 @@
+<header>
+    <div class="search">
+     <input type="text" placeholder="search for...">
+     <img [src]="" style="height:30px; cursor: pointer;" >
+    </div> 
+
+    <div class="profile">
+     <img [src]="" alt="" style="height: 30px;">
+     <label for="name" style="color: aliceblue;font-size: larger;" *ngFor="let student of students">{{student.name+ student.id}}</label>
+    </div>
+ </header>
+
+ <div class="links">
+     <span class="clickable" (click)="onclick()">Available Courses</span>
+     <span class="clickable" (click)="onclick2()">Registered Courses</span>
+ </div>
+
+<div class="course-container">
+  <!-- available courses -->
+  <div class="available-courses" [hidden]="hide">
+       <h3>Available Courses</h3>
+    <div class="course">
+      <h4>web2 by ps jobe</h4>
+      <button>Register</button>
+    </div>
+  
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>Register</button>
+      </div>
+
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>Register</button>
+      </div>
+        
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>Register</button>
+      </div>
+
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>Register</button>
+      </div>
+
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>Register</button>
+      </div>
+
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>Register</button>
+      </div>
+   
+ </div>
+<!-- registered courses  -->
+ <div class="registered-courses" [hidden]="hide2">
+    <h3>Registered Courses</h3>
+    <div class="course">
+      <h4>web2 by ps jobe</h4>
+      <button>UnRegister</button>
+    </div>
+  
+      <div class="course">
+        <h4>web2 by ps jobe</h4>
+        <button>UnRegister</button>
+      </div>
+   
+  
+ </div>
+
+
+</div>
+
+ 
+ 
+
+ 
