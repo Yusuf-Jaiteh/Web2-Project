@@ -1,0 +1,52 @@
+header{
+    background-color: rgb(24, 24, 71);
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom:50px;
+}
+
+header .search{
+    display: flex;
+    align-items: center;
+    margin-left:15px;
+    background-color:rgb(83, 98, 136);
+    
+}
+
+header .search input{
+    background: transparent;
+    border: none;
+}
+
+header .profile{
+    margin-right: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
+.links{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.links .clickable:hover{
+    color: rgb(81, 247, 247);
+ }
+
+ .clickable{
+     cursor: pointer;
+     color: grey
+ }
+
+ .view-users{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }

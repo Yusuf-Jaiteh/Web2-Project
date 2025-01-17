@@ -1,16 +1,15 @@
-<form >
-    <div class="card">
+<form  >
+    <div class="card" >
         <h3 id="sgn-in">Sign-In</h3>
-        <div >
-            <input class="form-labels" type="email" required placeholder="Enter your email">
-        </div>
-        <div >
-            <input class="form-labels" type="password" required placeholder="Enter your password">
+        <div>
+            <input class="form-labels" #email type="email" required placeholder="Enter your email">
         </div>
         <div>
-            <button class="submt" type="submit">Login</button>
+            <input class="form-labels" type="password" #password required placeholder="Enter your password">
+        </div>
+        <div>
+            <button class="submt" type="submit" (click)="onsubmit2(email.value, password.value)">Login</button>
         </div>
         <a class="lnk" href="/sign-up">Don't have an account? Sign-up</a>
-        
     </div>
 </form>

@@ -1,0 +1,90 @@
+{
+  "users": [
+    {
+      "id": "101",
+      "email": "yj@gmail.com",
+      "name": "yusuph jaiteh",
+      "role": "student",
+      "password": "yj123"
+    },
+    {
+      "id": "305",
+      "email": "ab@gmail.com",
+      "name": "alsainey barry",
+      "role": "admin",
+      "password": "ab123"
+    },
+    {
+      "id": "123",
+      "email": "sc@utg.edu.gm",
+      "name": "sulayman colley",
+      "role": "admin",
+      "password": "sc123"
+    },
+    {
+      "id": "456",
+      "email": "oj@gmail.com",
+      "name": "ousainou jaiteh",
+      "role": "lecturer",
+      "password": "oj123"
+    },
+    {
+      "id": "360",
+      "email": "lick@gmail.com",
+      "name": "licky ",
+      "role": "admin",
+      "password": "lck123"
+    },
+    {
+      "id": "111",
+      "email": "sj22316079@utg.edu.gm",
+      "name": "sankung ns jaiteh",
+      "role": "student",
+      "password": "sanks123"
+    },
+    {
+      "id": "442",
+      "email": "sj@gmail.com",
+      "name": "steve jobs",
+      "role": "student",
+      "password": "sj123"
+    },
+    {
+      "id": 373,
+      "email": "bm@gmail.com",
+      "name": "bassirou mboob",
+      "role": "student",
+      "password": "bm123"
+    }
+  ],
+  "AvailableCourses": [
+    {
+      "name": "web1",
+      "lecturer": "ps jobe",
+      "registerState": "Register",
+      "courseID": 202,
+      "id": "38e3"
+    },
+    {
+      "name": "web2",
+      "lecturer": "ps jobe",
+      "registerState": "Register",
+      "courseID": 302,
+      "id": "41d5"
+    },
+    {
+      "name": "Data Structures",
+      "lecturer": "ousainou jaiteh",
+      "registerState": "Register",
+      "courseID": 305,
+      "id": "2b30"
+    },
+    {
+      "name": "programming1",
+      "lecturer": "ousainou jaiteh",
+      "registerState": "Register",
+      "courseID": 201,
+      "id": "6b74"
+    }
+  ]
+}

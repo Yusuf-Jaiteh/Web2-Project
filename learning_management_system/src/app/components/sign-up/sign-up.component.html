@@ -7,15 +7,21 @@
             </select>
         </div>
         <div>
-            <input class="form-labels" type="email" required placeholder="Enter your email" >
+            <input class="form-labels" type="number" required placeholder="eneter your id" #id>
         </div>
         <div>
-            <input class="form-labels" type="password" required placeholder="Enter your password">
+            <input class="form-labels" type="text" required placeholder="Enter your name" #name>
         </div>
         <div>
-            <button class="submt" type="submit">Add user</button>
+            <input class="form-labels" type="email" required placeholder="Enter your email" #email>
         </div>
-        <a class="lnk" href="#">Already have an account? Sign-in</a>
+        <div>
+            <input class="form-labels" type="password" required placeholder="create password" #password>
+        </div>
+        <div>
+            <button class="submt" type="submit" (click)="adduser(+id.value,email.value,name.value,selectedRole,password.value)">Add user</button>
+        </div>
+        <a class="lnk" href="/sign-in">Already have an account? Sign-in</a>
         
     </div>
 </form>

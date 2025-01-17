@@ -1,0 +1,48 @@
+<header>
+    <div class="search">
+     <input type="text" placeholder="search for...">
+     <img src="" style="height:22px; cursor: pointer;" >
+    </div> 
+
+    <div class="profile">
+     <img src="" alt="" style="height: 30px; border-radius: 20px;">
+     <label for="name" style="color: aliceblue;font-size: larger;">ADMIN</label>
+    </div>
+ </header>
+
+ <div class="links">
+     <span class="clickable" (click)="goTocomponent()">Add user</span>
+     <span class="clickable" (click)="onclick()" >View users</span>
+     
+ </div>
+ <div class="container" [hidden]="display">
+    <div class="view-users">
+        <h3></h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.id  }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+
+                    <td style="display: flex;"> 
+                        <button class="btn btn-warning mr-2">Edit</button>
+                        <button  class="btn btn-danger">Delete</button>
+                    </td>
+                 
+                </tr>
+              </tbody>
+          </table>
+    </div>
+  
+ </div>
