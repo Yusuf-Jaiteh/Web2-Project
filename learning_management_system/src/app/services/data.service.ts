@@ -16,7 +16,7 @@ export class DataService {
 
     constructor(private router: Router,private http: HttpClient) { }
     
-    private url = 'http://localhost:3000/users';
+    private url = 'http://localhost:3001/users';
     private url2 = 'http://localhost:3000/AvailableCourses'
       
    
@@ -27,29 +27,24 @@ export class DataService {
     return this.http.get<user[]>(this.url);
   }
    // method to get data from users array that we created and log in
-  onSubmit(email: string, password: string):void {
-  this.http.get<user[]>(this.url).subscribe(users => {
-    this.users = users
-  });
-    alert('we are signing in')
-     const user = this.users.find(u => u.email === email && u.password === password);
-     if (user) {
-       alert('Login successful');
-       if (user.role === 'student') {
-        this.studentname = user.name;
-         this.router.navigate(['/student']);
-         
-       } else if (user.role === 'lecturer') {
-         this.router.navigate(['/lecturer']);
-         this.lectName = user.name;
-       } else if (user.role === 'admin') {
-         this.router.navigate(['/admin']);
-       }
-    //  localStorage.setItem('isLoggedIn', 'true');
-     } else {
-       alert('Invalid email or password');
-     }
-   };
+   onSubmit(email: string, password: string): void {
+    this.fetchAllUsers().subscribe(users => {
+      const user = users.find(u => u.email === email && u.password === password);
+      if (user) {
+        if (user.role === 'student') {
+          this.studentname = user.name;
+          this.router.navigate(['/student']);
+        } else if (user.role === 'lecturer') {
+          this.router.navigate(['/lecturer']);
+        }else if (user.role === 'admin') {
+          this.router.navigate(['/admin']);
+        }
+        // Add more role-based redirections as needed
+      } else {
+        alert('Invalid email or password');
+      }
+    });
+  }
     // method to get data from the json server and log in
     
     onSubmit2(email: string, password: string):void {
@@ -98,8 +93,8 @@ export class DataService {
   
 
    // method to add a user to the db
-   adduser(id:number,email:string,name:string,role:string,password:string){
-    const newUser: user = { id, email, name, role, password };
+   adduser(_id: number, email: string, name: string, role: string, password: string) {
+    const newUser: user = { _id, email, name, role, password };
     this.http.post<user>(this.url, newUser).subscribe(
       response => {
        alert('User added successfully');

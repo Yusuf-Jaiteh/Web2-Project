@@ -50,11 +50,18 @@
       "password": "sj123"
     },
     {
-      "id": 373,
+      "id": "373",
       "email": "bm@gmail.com",
       "name": "bassirou mboob",
       "role": "student",
       "password": "bm123"
+    },
+    {
+      "id": 234,
+      "email": "mk@gmail.com",
+      "name": "muhammed kujabi",
+      "role": "student",
+      "password": "mk123"
     }
   ],
   "AvailableCourses": [

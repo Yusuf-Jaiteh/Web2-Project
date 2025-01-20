@@ -20,8 +20,8 @@ export class SignUpComponent {
   selectedRole: string = this.roles[0];
   users:user[] = [];
 
-  adduser(id:number,email:string,name:string,role:string,password:string){
-    this.dataservice.adduser(id,email,name,role,password)
+  adduser(_id:number,email:string,name:string,role:string,password:string){
+    this.dataservice.adduser(_id,email,name,role,password)
   }
 
   
