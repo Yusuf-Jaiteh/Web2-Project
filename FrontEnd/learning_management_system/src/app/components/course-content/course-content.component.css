@@ -1,0 +1,96 @@
+/* Lesson Detail Container */
+.lesson {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Lesson Title */
+.lesson h1 {
+    color: #333;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Lesson Content (preformatted text) */
+.lesson pre {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Navigation Section (Previous/Next Lesson Links) */
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Previous Lesson Link */
+.lesson-navigation .previous {
+    background-color: #0066cc;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.lesson-navigation .previous:hover {
+    background-color: #004b8e;
+}
+
+/* Next Lesson Link */
+.lesson-navigation .next {
+    background-color: #28a745;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.lesson-navigation .next:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lesson {
+        padding: 25px 20px;
+    }
+
+    .lesson h1 {
+        font-size: 1.8rem;
+    }
+
+    .lesson pre {
+        font-size: 1rem;
+    }
+
+    .lesson-navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lesson-navigation .previous,
+    .lesson-navigation .next {
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+}

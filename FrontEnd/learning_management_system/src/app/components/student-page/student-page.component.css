@@ -1,0 +1,342 @@
+nav {
+    background-color: #0066cc; /* Blue background for a consistent theme */
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Added padding for better spacing */
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a floating effect */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+  
+  nav .profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  nav .profile label {
+    color: white; /* White text for better visibility */
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: 600;
+  }
+  
+  .icon {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px; /* Icon size adjustment */
+    transition: transform 0.3s ease;
+  }
+  
+  .icon:hover {
+    transform: rotate(90deg); /* Smooth rotation on hover for the menu icon */
+  }
+  
+  .profile-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;  
+    border-radius: 50%;
+    font-size: 24px;
+    color: #333; /* Dark color for the icon */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .profile-icon i {
+    font-size: 28px;
+  }
+  
+  .profile-icon:hover {
+    background-color: #0066cc; /* Change background on hover */
+    color: white; /* Icon turns white on hover */
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      padding: 0 10px; /* Reduced padding on smaller screens */
+    }
+  
+    .icon {
+      font-size: 28px; /* Slightly larger icon on mobile */
+    }
+  }
+  
+.dashboard-sidebar {
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, #0066cc, #0099ff);
+    color: white;
+    padding: 30px;
+    border-right: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 60px;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 998; /* Ensure sidebar is beneath navbar */
+  }
+  
+  .dashboard-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .menu-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu-item {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .submenu {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+  }
+  
+  .submenu-item {
+    margin: 0.5rem 0;
+  }
+  
+  .menu-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #333;
+    font-size: 1rem;
+    text-align: left;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .menu-button:hover {
+    background-color: #f0f0f0;
+    transform: translateX(5px);
+  }
+  
+  .grade-button {
+    background-color: #ff9f00;
+    color: #fff;
+  }
+  
+  .grade-button:hover {
+    background-color: #e68a00;
+  }
+  
+  .menu-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.6);
+  }
+  
+  .bg-dark {
+    background-color: #333 !important;
+    color: white;
+  }
+  
+  .card {
+    overflow: hidden;
+  }
+  
+  .p-3 {
+    padding: 12px;
+  }
+  
+  .m-3 {
+    margin: 12px 0;
+  }
+  
+
+.dashboard-sidebar.open{
+    transform: translateX(0);
+}
+
+ul {
+    list-style-type: none;
+    
+}
+
+.bg-danger {
+  background-color: #dc3545; /* Bootstrap red */
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.bg-danger button {
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.bg-danger button:hover {
+  background-color: #c82333;
+}
+
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.course-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.course-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.course-description {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.btnn {
+  /* background-color: #0066cc;
+  color: #fff; */
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btnn:hover {
+  background-color: #0057a3;
+  transform: translateY(-2px);
+}
+
+.btnn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.6);
+}
+
+
+
+
+
+
+
+
+
+.assignment-form-card {
+  background-color: #f9f9f9;
+  margin-left: 0;
+  padding: 30px;
+  max-width: 800px;
+  margin: 40px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card-header {
+  background-color: #0066cc;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+}
+
+.assignment-form {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+.btnn-primary {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.btnn-primary:hover {
+  background-color: #004d99;
+  transform: translateY(-2px);
+}
+
+.submit {
+  font-size: 1.1rem;
+}
+
+.d-grid {
+  margin-top: 20px;
+}
+
+.text-center {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .assignment-form-card {
+    padding: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+}

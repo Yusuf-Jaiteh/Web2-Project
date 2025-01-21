@@ -1,0 +1,110 @@
+<div class="card min-vh-100">
+    <div class="text-center">
+      <h1>{{ role === 'Instructor' ? 'My Courses' : 'Available Courses' }}</h1>
+    </div>
+  
+    <!-- Instructor Courses -->
+    <div *ngIf="role === 'Instructor'">
+      <div *ngIf="courseLength == 0" class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <h1 class="text-warning">You Don't Have Any Course Yet</h1>
+       </div>
+      <div *ngIf="courseLength != 0">
+        <ul class="row">
+          @for(obj of courses; track $index) {
+            <li class="col-12 col-md-5 card mx-3 my-4 p-3 course-card">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <p><i class="fa fa-book"></i></p>
+                  <h3 class="course-title">{{ obj.course.courseTitle }}</h3>
+                </div>
+                <p class="text-center">{{ obj.course.description }}</p>
+                <div class="d-flex justify-content-between">
+                  <!-- <button class="btn btn-primary mb-2 text-center">{{ obj.enrollments.length > 1 ? obj.enrollments.length + ' Enrolled students' : obj.enrollments.length === 1 ? '1 Enrolled student' : 'No Enrolled student' }}</button> -->
+                  <button class="btnn btn-primary mb-2 text-center">Lessons: {{obj.lessons.length }}</button>
+                  <button class="btnn btn-primary mb-2 text-center">Assignments: {{obj.assignments.length }}</button>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  
+    <!-- Student Courses -->
+    <div *ngIf="role === 'Student'">
+      <div *ngIf="courseLength == 0" class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <h1 class="text-warning">NO Course Is Available Yet</h1>
+       </div>
+      <div *ngIf="courseLength != 0">
+        <ul class="row">
+          @for(obj of courses; track $index) {
+            <li class="col-12 col-md-5 card mx-3 my-4 p-3 course-card">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <p><i class="fa fa-book"></i></p>
+                  <h3 class="text-center course-title">{{ obj.course.courseTitle }}</h3>
+                </div>
+                <p class="text-center">{{ obj.course.description }}</p>
+                <div class="d-flex justify-content-between">
+                  <button  class="btnn btn-primary mb-2">{{ obj.course.instructor.firstName }} {{ obj.course.instructor.lastName }}</button>
+                  @if(obj.enrollments.length > 0){
+                    @for(enrollment of obj.enrollments; track $index){
+                      @if(enrollment.user === id){
+                        <button  class="btnn btn-primary mb-2" >ENROLLED</button>
+                      } @else{
+                        <button  class="btnn btn-primary mb-2" (click)="addEnrollment(obj.course)">Enroll</button>
+                      }
+                    }
+                  }@else{
+                    <button  class="btnn btn-primary mb-2" (click)="addEnrollment(obj.course)">Enroll</button>
+                  }
+                 
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  
+    <!-- Admin Courses -->
+    <div *ngIf="role === 'Admin'">
+      <div *ngIf="courseLength == 0" class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <h1 class="text-warning">NO Course Is Available Yet</h1>
+       </div>
+    
+      <div *ngIf="courseLength != 0" class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="table-success">
+            <tr>
+              <th class="text-center font-weight-bold">Number</th>
+              <th class="text-center font-weight-bold">Name</th>
+              <th class="text-center font-weight-bold">Course Description</th>
+              <th class="text-center font-weight-bold">Taught By</th>
+              <th class="text-center font-weight-bold">Number of lessons</th>
+              <th class="text-center font-weight-bold">Number of enrollments</th>
+              <th class="text-center font-weight-bold">Number of Assignments</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(obj of courses; track $index) {
+              <tr>
+                <td class="text-center font-weight-bold">{{ $index + 1 }}</td>
+                <td class="text-center font-weight-bold">{{ obj.course.courseTitle }}</td>
+                <td class="text-center font-weight-bold">{{ obj.course.description }}</td>
+                <td class="text-center font-weight-bold">{{ obj.course.instructor.firstName }} {{ obj.course.instructor.lastName }}</td>
+                <td class="text-center font-weight-bold">{{ obj.lessons.length }}</td>
+                <td class="text-center font-weight-bold">{{ obj.enrollments.length }}</td>
+                <td class="text-center font-weight-bold">{{ obj.assignments.length }}</td>
+                <td class="text-center font-weight-bold">
+                  <button class="btn btn-warning" (click)="handleEditCourse(obj.course)">Edit</button>
+                  <button class="btn btn-danger" (click)="handleDeleteCourse(obj.course._id)">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

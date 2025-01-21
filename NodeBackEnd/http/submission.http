@@ -1,0 +1,43 @@
+###
+GET http://localhost:3000/api/submissions HTTP/1.1
+
+###
+GET http://localhost:3000/api/submissions/1 HTTP/1.1
+
+###
+POST http://localhost:3000/api/submissions HTTP/1.1
+Content-Type: application/json
+
+{
+    
+    "submissionDate": "2025-01-01",
+    "content": "The quick brown fox jumps over the lazy do",
+    "user": {
+        "_id":  "6785e2ac047af1c9af4dc221"
+    },
+     "course": {
+            "_id": "6785ebb32fc86bae9a56dbad"
+        },
+        "assignment": {
+            "_id": "6785ee6957f1bbce48f2a31a"
+        },
+    "grade": 25
+
+
+}
+
+###
+PUT http://localhost:3000/api/submissions/1 HTTP/1.1
+Content-Type: application/json
+
+{
+   "id":{
+        "userId": 1,
+        "assignmentId": 2
+    },
+    "submissionDate": "2025-09-09",
+    "grade": 5
+}
+
+###
+DELETE http://localhost:3000/api/submissions/1 HTTP/1.1

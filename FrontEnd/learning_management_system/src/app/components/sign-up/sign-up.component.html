@@ -1,0 +1,31 @@
+<form class="form" [formGroup]="addUserForm">
+    <div class="card" *ngIf="!isDetails">
+        <h3 id="sgn-up">Sign-Up</h3>
+        <div>
+            <input class="form-control mb-3" type="text" required placeholder="Enter your username" formControlName="username">
+        </div>
+        <div>
+            <input class="form-control mb-4" type="password" required placeholder="Enter your password" formControlName="password">
+        </div>
+        <div>
+            <button class="btn btn-primary mb-2" type="submit" (click)="completeDetails()">Continue</button>
+        </div>
+        <a class="lnk" routerLink="/signin">Already have an account? Sign-in</a>
+    </div>
+
+    <div class="card" *ngIf="isDetails">
+        <h3 id="sgn-up">Please complete to proceed</h3>
+        <div class="form-group">
+            <label for="firstName" class="form-label">First Name</label>
+            <input class="form-control" type="text" id="firstName" name="firstName" formControlName="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input class="form-control" type="text" id="lastName" name="lastName" formControlName="lastName" required />
+          </div>
+          <div>
+            <button class="btn btn-primary mb-2" type="submit" (click)="handleSubmit()">Add user</button>
+        </div>
+        <a class="lnk" routerLink="/signin">Already have an account? Sign-in</a>
+    </div>
+</form>

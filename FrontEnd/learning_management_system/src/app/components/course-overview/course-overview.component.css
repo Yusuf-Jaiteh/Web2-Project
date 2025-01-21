@@ -1,0 +1,93 @@
+/* Global Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Course Container */
+.course {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+/* Course Title */
+.course h1 {
+    color: #333;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Course Description */
+.course p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Lessons Section */
+.lessons {
+    margin-top: 20px;
+}
+
+.lessons h2 {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Lessons List */
+.lessons ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.lessons ul li {
+    margin-bottom: 12px;
+}
+
+/* Individual Lesson Link */
+.lessons ul li a {
+    color: #0066cc;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.lessons ul li a:hover {
+    color: #004b8e;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .course {
+        padding: 25px 20px;
+    }
+
+    .course h1 {
+        font-size: 1.8rem;
+    }
+
+    .course p {
+        font-size: 1rem;
+    }
+
+    .lessons h2 {
+        font-size: 1.4rem;
+    }
+
+    .lessons ul li a {
+        font-size: 1rem;
+    }
+}

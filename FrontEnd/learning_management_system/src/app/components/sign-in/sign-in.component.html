@@ -1,0 +1,36 @@
+<form class="form" [formGroup]="signInForm" (ngSubmit)="handleLogin()">
+  <div class="card">
+      <h3 id="sgn-in">Sign-In</h3>
+
+      <div *ngIf="successMessage" class="alert alert-success">
+          {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+      </div>
+
+      <div>
+          <input
+              class="form-control mb-3"
+              type="email"
+              placeholder="Enter your username"
+              formControlName="username"
+          />
+      </div>
+
+      <div>
+          <input
+              class="form-control mb-4"
+              type="password"
+              placeholder="Enter your password"
+              formControlName="password"
+          />
+      </div>
+
+      <div>
+          <button class="btn btn-primary mb-2" type="submit">Login</button>
+      </div>
+      <a class="lnk" routerLink="/signup">Don't have an account? Sign-up</a>
+  </div>
+</form>

@@ -1,0 +1,38 @@
+###
+GET http://localhost:3000/api/lessons HTTP/1.1
+
+###
+GET http://localhost:3000/api/lessons/1 HTTP/1.1
+
+###
+POST http://localhost:3000/api/lessons HTTP/1.1
+Content-Type: application/json
+
+{
+    "course": {
+            "_id": "6785e2fd047af1c9af4dc22d"
+        },
+    "lessonTitle": "Lesson2" ,
+    "content": "ffffffffffffffffffdj jjjjjjjjjj kkkkkkkkkkkkkkkkkkk",
+    "previousLessonId": 1,
+    "nextLessonId": 3,
+    "orderNumber": 2
+
+}
+
+###
+PUT http://localhost:3000/api/lessons/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "course": {
+                "id": 1
+            },
+        "lessonTitle": "title",
+        "content": "ffffffffffffffffffdj jjjjjjjjjj kkkkkkkkkkkkkkkkkkk",
+        "orderNumber": 1
+}
+
+###
+DELETE http://localhost:3000/api/lessons/2 HTTP/1.1

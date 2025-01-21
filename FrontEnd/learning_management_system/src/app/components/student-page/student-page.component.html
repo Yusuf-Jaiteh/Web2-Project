@@ -1,0 +1,179 @@
+<div class="card min-vh-100">
+  <div class="text-center">
+    <h1>{{ role === 'Student' ? 'My Courses' : 'Available Courses' }}</h1>
+  </div>
+  
+  <nav>
+    <div class="dashboard-sidebar " [class.open]="isSidebar">
+      <div class="sidebar-content">
+        <ul class="menu-list">
+          <li class="menu-item">COURSES
+            <ul class="submenu">
+              <li class="submenu-item">
+                <button (click)="handleAction('courselist')" class="menu-button">ALL COURSES</button>
+              </li>
+              <li class="submenu-item">
+                <button (click)="handleAction('enrolledcourses') " (click)="getAllCourses()" class="menu-button">ENROLLED COURSES</button>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">ASSIGNMENTS
+            <ul class="submenu">
+              <li class="submenu-item">
+                <button (click)="handleAction('allassignments')" class="menu-button">SUBMIT ASSIGNMENT</button>
+              </li>
+              <li class="submenu-item">
+                <button (click)="handleAction('viewgrades')" class="menu-button grade-button" >VIEW GRADE</button>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="bg-danger p-3 m-3">
+              <button class="btn btn-danger" (click)="logout()">LOGOUT</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+
+    <button class="icon" (click)="displaySidebar()">
+      <i class="fa fa-bars"></i>
+    </button>
+  
+    <div class="profile">
+      <label for="name">{{ name }}</label>
+      
+      <div class="profile-icon">
+        <i class="fa fa-user-circle"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div *ngIf="action === 'courselist'" [style.marginLeft]="isSidebar ? '320px' : '0'">
+    <app-course-list></app-course-list>
+  </div>
+
+
+  <div *ngIf="action === 'enrolledcourses'" [style.marginLeft]="isSidebar ? '320px' : '0'">
+    <div *ngIf="isEnrolled; else noEnrollments">
+      <ul class="row">
+        <ng-container *ngFor="let obj of courses; track $index">
+          <ng-container *ngFor="let enro of obj.enrollments; track $index">
+            <ng-container *ngIf="enro.user === id">
+              <li class="col-12 col-md-5 card mx-3 my-4 p-3 course-card">
+                <div>
+                  <div class="d-flex justify-content-between">
+                    <p><i class="fa fa-book"></i></p>
+                    <h3 class="text-center course-title">{{ obj.course.courseTitle }}</h3>
+                  </div>
+                  <p class="text-center">{{ obj.course.description }}</p>
+                  <div class="d-flex justify-content-between">
+                    <button class="btnn btn-primary mb-2"> Enrolled Students: {{ obj.enrollments.length }}</button>
+                    <button class="btnn btn-primary mb-2"> Enrolled Date: {{ enro.enrollmentDate | date: 'dd MMM yyyy' }}</button>
+                  </div>
+                </div>
+              </li>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ul>
+    </div>
+  
+    <ng-template #noEnrollments>
+      <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <h1 class="text-warning">You are not enrolled in any course yet.</h1>
+       </div>
+    </ng-template>
+    
+  </div>
+  
+
+  <div *ngIf="action === 'allassignments'"  [style.marginLeft]="isSidebar ? '320px' : '0'">
+    <div *ngIf="assignmentLength == 0" class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+      <h1 class="text-warning">No Assignment Is Available Yet</h1>
+     </div>
+    <div *ngIf="assignmentLength != 0">
+      <ul class="row">
+        @for(obj of assignments; track $index) {
+          @for(cours of obj.course; track $index){
+          <li class="col-12 col-md-5 card mx-3 my-4 p-3 course-card">
+            <div>
+              <div class="d-flex justify-content-between">
+                <p><i class="fa fa-book"></i></p>
+                <h3 class="text-center course-title">{{ cours.courseTitle }}</h3>
+              </div>
+              <h3 class="text-center course-title">{{ obj.assignmentTitle }}</h3>
+              <div class="card mx-3 my-4 p-3">
+                <p class="text-center">{{ obj.description }}</p>
+              </div>
+              
+              <div class="d-flex justify-content-between">
+                <button  class="btnn btn-primary mb-2">DUE DATE: {{obj.dueDate | date: 'dd MMM yyyy' }}</button>
+                <button  class="btnn btn-primary mb-2 text-center" (click)="handleSubmission(cours, obj)">SUBMIT</button>
+              </div>
+            </div>
+          </li>
+          }
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="action === 'submissionForm'" [style.marginLeft]="isSidebar ? '320px' : '0'">
+    <div class="assignment-form-card">
+      <div class="card-header">
+        <h3>Submit Assignment</h3>
+      </div>
+      <form action="#" method="POST" class="assignment-form" [formGroup]="addSubmissionForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+          <label for="content" class="form-label">Content</label>
+          <textarea class="form-control" id="content" name="content" rows="13" formControlName="content" required></textarea>
+        </div>
+        <div class="d-grid gap-2">
+          <div class="text-center">
+            <button type="submit" class="btn btnn-primary submit" >SEND</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="action === 'viewgrades'"  [style.marginLeft]="isSidebar ? '320px' : '0'">
+    <div *ngIf="submissionLength == 0" class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+      <h1 class="text-warning">You Did Not Submit Any Assignment Yet</h1>
+     </div>
+    <div *ngIf="submissionLength != 0">
+      <ul class="row">
+        @for(obj of submissions; track $index) {
+          @if(obj.user._id == id){
+          <li class="col-12 col-md-5 card mx-3 my-4 p-3 course-card">
+            <div>
+              <div class="d-flex justify-content-between">
+                <p><i class="fa fa-book"></i></p>
+                <h3 class="text-center course-title">{{ obj.course.courseTitle }}</h3>
+              </div>
+              <h3 class="text-center course-title">{{ obj.assignment.assignmentTitle }}</h3>
+              <div class="card mx-3 my-4 p-3">
+                <p class="text-center">{{ obj.grade }}%</p>
+              </div>
+              
+              <div class="d-flex justify-content-between">
+                <button  class="btnn btn-primary mb-2">SUBMISSION DATE: {{obj.submissionDate  | date: 'dd MMM yyyy' }}</button>
+                <button  class="btnn btn-primary mb-2 text-center" >SUBMITED</button>
+              </div>
+            </div>
+          </li>
+          }
+        }
+      </ul>
+    </div>
+  </div>
+  
+</div>
+
+
+ 

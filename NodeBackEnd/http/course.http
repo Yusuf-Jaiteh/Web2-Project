@@ -1,0 +1,39 @@
+###
+GET http://localhost:3000/api/courses HTTP/1.1
+
+###
+GET http://localhost:3000/api/courses/instructor/6785e2cd047af1c9af4dc223 HTTP/1.1
+
+###
+GET http://localhost:3000/api/courses/6785e2fd047af1c9af4dc22d HTTP/1.1
+
+###
+GET http://localhost:3000/api/courses/enrollment/user/1 HTTP/1.1
+
+###
+POST http://localhost:3000/api/courses HTTP/1.1
+Content-Type: application/json
+
+{
+    "instructor": {
+        "_id": "6785e2cd047af1c9af4dc223"
+    },
+    "courseTitle": "Doubting",
+    "description": "To clear my doubt"
+}
+
+###
+PUT http://localhost:3000/api/courses/5  HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "instructor": {
+                "id": 1
+            },
+    "courseTitle": "title",
+    "description": "described"
+}
+
+###
+DELETE http://localhost:3000/api/courses/678d37538928aa05113f895a HTTP/1.1
