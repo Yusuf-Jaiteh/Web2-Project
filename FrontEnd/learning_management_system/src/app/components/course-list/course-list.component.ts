@@ -31,6 +31,9 @@ export class CourseListComponent implements OnInit{
   enrollmentService = inject(EnrollmentService);
   userService = inject(UserService);
 
+  successMessage: string | null = null;  
+  errorMessage: string | null = null;
+
   ngOnInit() {   
     this.getAllUsers();  
     if(this.role === 'Student'){
@@ -59,7 +62,10 @@ export class CourseListComponent implements OnInit{
   // Call the enrollment service with the enrollment data
   this.enrollmentService.addEnrollment(enrollmentData).subscribe((enrollment: Enrollment) => {
     this.enrollment = enrollment;  // Handle the response if necessary
-    this.getAllCourses()
+         this.successMessage = 'Your enrollment is successful';
+          setTimeout(() => this.successMessage = null, 2000)
+          this.errorMessage = null;
+          setTimeout(() => {this.getAllCourses()}, 2100);
   });
   }
 
@@ -81,7 +87,10 @@ export class CourseListComponent implements OnInit{
     if (confirm('Are you sure you want to delete this course?')) {
       this.courseService.deleteCourse(courseId).subscribe(
         (response) => {
-          this.getAllCourses();  // Refresh the course list
+          this.successMessage = 'Course Deleted Succesfully.';
+          setTimeout(() => this.successMessage = null, 2000)
+          this.errorMessage = null;
+          setTimeout(() => {this.getAllCourses()}, 2100);
         },
         (error) => {
           console.error('Error deleting course:', error);

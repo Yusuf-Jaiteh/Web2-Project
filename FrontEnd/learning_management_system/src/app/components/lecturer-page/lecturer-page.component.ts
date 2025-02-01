@@ -57,6 +57,9 @@ export class LecturerPageComponent implements OnInit{
   lesson?: any;
   gradeInputVisible: { [id: string]: boolean } = {};  // Object to track which grade input is visible
   gradeValue: { [id: string]: string } = {};  // Object to store the grade input value
+
+  successMessage: string | null = null;  
+  errorMessage: string | null = null;
   
 
   displaySidebar(){
@@ -89,12 +92,17 @@ export class LecturerPageComponent implements OnInit{
 
   handleLessonSave(){
     this.lessonService.addLesson(this.addLessonForm.value).subscribe((response: any) => {
-      this.handleAction('courselist');
+      this.successMessage = 'Lesson added Succesfully.';
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
+        setTimeout(() => {this.handleAction('courselist')}, 2100);
       this.addLessonForm.reset();
     }
     ,(error: any) => {
     
       if (error.status === 400 && error.error) {
+        this.errorMessage = 'Error adding lesson';
+        setTimeout(() => this.errorMessage = null, 2000);
         console.log(error.error)
     }
     }
@@ -103,12 +111,17 @@ export class LecturerPageComponent implements OnInit{
 
   handleAssignmentSave(){
     this.assignmentService.addAssignment(this.addAssignmentForm.value).subscribe((response: any) => {
-      this.handleAction('courselist');
+        this.successMessage = 'Assignment added Succesfully.';
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
+        setTimeout(() => {this.handleAction('courselist')}, 2100);
       this.addAssignmentForm.reset();
     }
     ,(error: any) => {
     
       if (error.status === 400 && error.error) {
+        this.errorMessage = 'Error adding assignment';
+        setTimeout(() => this.errorMessage = null, 2000);
         console.log(error.error)
     }
     }
@@ -125,8 +138,10 @@ export class LecturerPageComponent implements OnInit{
     localStorage.removeItem('role');
     localStorage.removeItem('id');
 
-    // Example: Redirect to login page after logging out
-    this.router.navigate(['/signin']);
+    this.successMessage = 'Logout Succesfully.';
+    setTimeout(() => this.successMessage = null, 1000)
+    this.errorMessage = null;
+    setTimeout(() => {this.router.navigate(['/signin'])}, 1100)
   }
 
   submitGrade(submissionId: string): void {
@@ -137,14 +152,22 @@ export class LecturerPageComponent implements OnInit{
         response => {
           // Hide the grade input field after submission
           this.gradeInputVisible[submissionId] = false;
-          this.handleAction('gradeassignent');
+          this.successMessage = 'Assignment Graded Succesfully.';
+          setTimeout(() => this.successMessage = null, 2000)
+          this.errorMessage = null;
+        setTimeout(() => {this.getAllSubmission()}, 2000)
+          setTimeout(() => {this.handleAction('gradeassignent')}, 2100);
           
         },
         error => {
+          this.errorMessage = 'Error Grading assignment';
+          setTimeout(() => this.errorMessage = null, 2000);
           console.error('Error updating grade:', error);
         }
       );
     } else {
+        this.errorMessage = 'Grade cannot be empty';
+        setTimeout(() => this.errorMessage = null, 2000);
       console.error('Grade cannot be empty');
     }
   }

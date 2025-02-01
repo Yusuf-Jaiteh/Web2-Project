@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
   // Compare the provided password with the stored hashed password
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    return res.status(400).send('Invalid credentials');
+    return res.status(400).send('Incorrect Password');
   }
 
   // Generate JWT token
@@ -61,8 +61,8 @@ router.post('/login', async (req, res) => {
   // Return selected user properties
   const userResponse = {
     role: user.role,
-    firstName: user.firstName, // Example of another property to return
-    lastName: user.lastName, // Add any other fields you want to expose
+    firstName: user.firstName, 
+    lastName: user.lastName,
     id: user.id,
   };
 

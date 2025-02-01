@@ -30,6 +30,9 @@ export class SignUpComponent {
   addUserForm: FormGroup;
   user?: User;
 
+  successMessage: string | null = null;  
+  errorMessage: string | null = null;
+
   completeDetails(){
     this.isDetails = !this.isDetails;
   }
@@ -40,15 +43,22 @@ export class SignUpComponent {
     this.userService.addUser(user).subscribe(
       (response: any) => {
         this.user = response;
-
+        this.successMessage = 'Account Created Successfully.';
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
+        setTimeout(() => this.router.navigate(['/signin']), 2100);
+        
       },
       (error: any) => {
   
-        console.log(error.error)
+        this.errorMessage = error.error;
+        this.successMessage = null;
+        setTimeout(() => this.errorMessage = null, 2000)
+        setTimeout(() => {this.completeDetails()}, 2000)
       }
     );
   
-    this.router.navigate(['/signin']);
+    
   }
 
 }

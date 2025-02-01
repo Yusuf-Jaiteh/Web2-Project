@@ -35,8 +35,10 @@ export class SignInComponent {
       (response: any) => {
         this.apiResponse = response;
         this.successMessage = 'Login successful! Welcome back.';
+        setTimeout(() => this.successMessage = null, 2000)
         this.errorMessage = null;
 
+        setTimeout(() => {
          // Assuming the response contains the necessary data
       const {  token, user: { firstName, lastName, role, id } } = response;
 
@@ -53,14 +55,17 @@ export class SignInComponent {
       } else{
         this.router.navigate(['/admin'])
       }
+        }, 2100)
 
       },
       (error: any) => {
   
         if (error.status === 400 && error.error) {
           this.errorMessage = error.error || 'An error occurred. Please try again.';
+          setTimeout(() => this.errorMessage = null, 2000);
         } else {
           this.errorMessage = 'An error occurred. Please try again later.';
+          setTimeout(() => this.errorMessage = null, 2000);
         }
         this.successMessage = null;
         

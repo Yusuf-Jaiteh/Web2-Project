@@ -9,7 +9,7 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 export const routes: Routes = [
     {
        path:'',
-       redirectTo:'signup',
+       redirectTo:'signin',
        pathMatch:'full' 
     },
 

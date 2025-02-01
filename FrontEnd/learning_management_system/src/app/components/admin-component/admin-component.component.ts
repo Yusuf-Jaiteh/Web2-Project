@@ -52,6 +52,9 @@ constructor(private router: Router,private fb: FormBuilder, private courseEditSe
   mode: string = 'add';
   isSidebar: boolean = false;
 
+  successMessage: string | null = null;  
+  errorMessage: string | null = null;
+
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllCourses();
@@ -87,21 +90,32 @@ handleAction(action: string){
 
 handleCourseAdd() {
   if (this.mode === 'update' && this.course) {
-    // Update the course
+  
     this.courseService.updateCourse(this.course._id, this.addCourseForm.value).subscribe((response: any) => {
-      this.getAllCourses();  // Refresh the course list
-      this.handleAction('courselist');  // Switch back to course list view
-      this.addCourseForm.reset();  // Reset the form
+      this.successMessage = 'Course Updated Succesfully.';
+      setTimeout(() => this.mode = 'add', 2000);
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
+      this.getAllCourses();  
+      setTimeout(() => {this.handleAction('courselist')}, 2100);
+        
+      this.addCourseForm.reset();  
     }, (error: any) => {
+      this.errorMessage = 'Error updating course';
+      setTimeout(() => this.errorMessage = null, 2000);
       console.error('Error updating course:', error);
     });
   } else {
-    // Add a new course
     this.courseService.addCourse(this.addCourseForm.value).subscribe((response: any) => {
-      this.getAllCourses();  // Refresh the course list
-      this.handleAction('courselist');  // Switch back to course list view
-      this.addCourseForm.reset();  // Reset the form
+      this.successMessage = 'Course Created Succesfully.';
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
+      this.getAllCourses();  
+      setTimeout(() => {this.handleAction('courselist')}, 2100)
+      this.addCourseForm.reset();  
     }, (error: any) => {
+      this.errorMessage = 'Error adding course';
+      setTimeout(() => this.errorMessage = null, 2000);
       console.error('Error adding course:', error);
     });
   }
@@ -110,30 +124,41 @@ handleCourseAdd() {
 
 handleUserAdd() {
   if (this.mode === 'update' && this.user) {
-    // If in update mode, use the user ID to update the user
+    
     this.userService.updateUser(this.user._id, this.addUserForm.value).subscribe(
       (response) => {
+        this.successMessage = 'User Updated Succesfully.';
+        setTimeout(() => this.mode = 'add', 2000);
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
         this.getAllUsers();
-        this.handleAction('userlist');
+        setTimeout(() => {this.handleAction('userlist')}, 2100)
         this.addUserForm.reset();
-        this.mode = 'add';  // Reset to add mode after updating
+        this.mode = 'add';  
       },
       (error) => {
         if (error.status === 400 && error.error) {
+          this.errorMessage = 'Error updating user';
+          setTimeout(() => this.errorMessage = null, 2000);
           console.log(error.error);
         }
       }
     );
   } else {
-    // Normal add user flow
+    
     this.userService.addUser(this.addUserForm.value).subscribe(
       (response) => {
+        this.successMessage = 'User Created Succesfully.';
+        setTimeout(() => this.successMessage = null, 2000)
+        this.errorMessage = null;
         this.getAllUsers();
-        this.handleAction('userlist');
+        setTimeout(() => {this.handleAction('userlist')}, 2100)
         this.addUserForm.reset();
       },
       (error) => {
         if (error.status === 400 && error.error) {
+          this.errorMessage = 'Error adding user';
+          setTimeout(() => this.errorMessage = null, 2000);
           console.log(error.error);
         }
       }
@@ -143,27 +168,27 @@ handleUserAdd() {
 
 
   handleEditUser(user: User) {
-    this.action = 'adduser';  // Switch to the 'adduser' form to edit the user
-    this.mode = 'update';  // Indicate that we're in update mode
+    this.action = 'adduser';  
+    this.mode = 'update';  
     this.addUserForm.patchValue({
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
-      password: '',  // Don't pre-fill the password field
+      password: '',  
       role: user.role
     });
-    this.user = user;  // Store the user to use their ID later
+    this.user = user;  
   }
 
   handleEditCourse(course: Course) {
-    this.action = 'addcourse'; // Switch to course edit mode
-    this.mode = 'update'; // Set mode to 'update'
+    this.action = 'addcourse'; 
+    this.mode = 'update'; 
     
-    // Populate the form with course data
+    
     this.addCourseForm.patchValue({
       courseTitle: course.courseTitle,
       description: course.description,
-      instructor: course.instructor._id // assuming instructor is a user object with an `id`
+      instructor: course.instructor._id 
     });
 
     this.course = course;
@@ -174,9 +199,14 @@ handleUserAdd() {
     if (confirm('Are you sure you want to delete this user?')) {
       this.userService.deleteUser(userId).subscribe(
         (response) => {
-          this.getAllUsers();  // Refresh the user list
+          this.successMessage = 'User Deleted Succesfully.';
+          setTimeout(() => this.successMessage = null, 2000)
+          this.errorMessage = null;
+          setTimeout(() => {this.getAllUsers()}, 2100);
         },
         (error) => {
+          this.errorMessage = 'Error adding user';
+          setTimeout(() => this.errorMessage = null, 2000);
           console.error('Error deleting user:', error);
         }
       );
@@ -187,15 +217,15 @@ handleUserAdd() {
   
 
   logout() {
-    // Logic for clearing user session or token
-    console.log('Logging out...');
+    
     localStorage.removeItem('firstname');
     localStorage.removeItem('lastname');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('id');
-
-    // Example: Redirect to login page after logging out
-    this.router.navigate(['/signin']);
+    this.successMessage = 'Logout Succesfully.';
+    setTimeout(() => this.successMessage = null, 1000)
+    this.errorMessage = null;
+    setTimeout(() => {this.router.navigate(['/signin'])}, 1100)
   }
 }

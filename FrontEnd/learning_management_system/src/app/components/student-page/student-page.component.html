@@ -1,7 +1,10 @@
+<div *ngIf="action === 'courselist'" [style.marginLeft]="isSidebar ? '320px' : '0'">
+  <app-course-list></app-course-list>
+</div>
 <div class="card min-vh-100">
-  <div class="text-center">
+  <!-- <div class="text-center">
     <h1>{{ role === 'Student' ? 'My Courses' : 'Available Courses' }}</h1>
-  </div>
+  </div> -->
   
   <nav>
     <div class="dashboard-sidebar " [class.open]="isSidebar">
@@ -29,6 +32,14 @@
             </ul>
           </li>
 
+          <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+          </div>
+        
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+
           <li>
             <div class="bg-danger p-3 m-3">
               <button class="btn btn-danger" (click)="logout()">LOGOUT</button>
@@ -52,13 +63,13 @@
     </div>
   </nav>
 
-  <div *ngIf="action === 'courselist'" [style.marginLeft]="isSidebar ? '320px' : '0'">
-    <app-course-list></app-course-list>
-  </div>
 
 
   <div *ngIf="action === 'enrolledcourses'" [style.marginLeft]="isSidebar ? '320px' : '0'">
     <div *ngIf="isEnrolled; else noEnrollments">
+      <div class="text-center">
+        <h1>Enrolled Courses</h1>
+      </div>
       <ul class="row">
         <ng-container *ngFor="let obj of courses; track $index">
           <ng-container *ngFor="let enro of obj.enrollments; track $index">
@@ -96,6 +107,9 @@
       <h1 class="text-warning">No Assignment Is Available Yet</h1>
      </div>
     <div *ngIf="assignmentLength != 0">
+      <div class="text-center">
+        <h1>My Assignments</h1>
+      </div>
       <ul class="row">
         @for(obj of assignments; track $index) {
           @for(cours of obj.course; track $index){
@@ -127,6 +141,13 @@
       <div class="card-header">
         <h3>Submit Assignment</h3>
       </div>
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
       <form action="#" method="POST" class="assignment-form" [formGroup]="addSubmissionForm" (ngSubmit)="onSubmit()">
         
         <div class="form-group">
@@ -147,6 +168,14 @@
       <h1 class="text-warning">You Did Not Submit Any Assignment Yet</h1>
      </div>
     <div *ngIf="submissionLength != 0">
+      @if(numOfStudentSubmission == 0){
+        <div  class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+          <h1 class="text-warning">You Did Not Submit Any Assignment Yet</h1>
+         </div>
+      }@else {
+      <div class="text-center">
+        <h1>My Assignment Grades</h1>
+      </div>
       <ul class="row">
         @for(obj of submissions; track $index) {
           @if(obj.user._id == id){
@@ -170,6 +199,7 @@
           }
         }
       </ul>
+     }
     </div>
   </div>
   
@@ -177,3 +207,49 @@
 
 
  
+
+
+
+
+<!-- 
+<div *ngIf="action === 'allassignments'"  [style.marginLeft]="isSidebar ? '320px' : '0'">
+  <div *ngIf="assignmentLength == 0" class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <h1 class="text-warning">No Assignment Is Available Yet</h1>
+   </div>
+  <div *ngIf="assignmentLength != 0">
+    <div class="text-center">
+      <h1>My Assignments</h1>
+    </div>
+    <ul class="row">
+      <ng-container *ngFor="let obj of assignments; let objIndex = index">
+        <ng-container *ngFor="let cours of obj.course; let coursIndex = index">
+          <div *ngIf="isCourseEnrolled(cours)">
+            <li class="col-12 col-md-5 card mx-3 my-4 p-3 course-card">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <p><i class="fa fa-book"></i></p>
+                  <h3 class="text-center course-title">{{ cours.courseTitle }}</h3>
+                </div>
+                <h3 class="text-center course-title">{{ obj.assignmentTitle }}</h3>
+                <div class="card mx-3 my-4 p-3">
+                  <p class="text-center">{{ obj.description }}</p>
+                </div>
+
+                <div *ngIf="isCourseEnrolled(cours)">
+                  <p><strong>Enrolled!</strong></p>
+                  <p>{{ cours.description }}</p>
+                  You can display more course properties here
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                  <button  class="btnn btn-primary mb-2">DUE DATE: {{obj.dueDate | date: 'dd MMM yyyy' }}</button>
+                    <button  class="btnn btn-primary mb-2 text-center" (click)="handleSubmission(cours, obj)">SUBMIT</button>
+                </div>
+              </div>
+            </li>
+      </div>
+      </ng-container>
+    </ng-container>
+    </ul>
+  </div>
+</div> -->

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CourseListComponent } from '../course-list/course-list.component';
 import { CourseService } from '../../services/course/course.service';
 import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AssignmentService } from '../../services/assignment/assignment.service';
@@ -18,7 +19,7 @@ import { SubmissionService } from '../../services/submission/submission.service'
 })
 export class StudentPageComponent implements OnInit{
 
-  constructor(private router: Router,private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private router: Router,private fb: FormBuilder, private datePipe: DatePipe,private cdr: ChangeDetectorRef) {
     this.addSubmissionForm = this.fb.group({
       assignment: [''],
       user: [''],
@@ -50,6 +51,14 @@ export class StudentPageComponent implements OnInit{
   action: string = "courselist";
   isSidebar: boolean = false;
   isEnrolled: boolean = false;
+  numOfStudentSubmission : any = 0;
+  enrolledCourses: any[] = [
+    { _id: '679d847a925f1251915912f7', courseTitle: 'Course 1', description: 'Description of Course 1' },
+    { _id: '2', courseTitle: 'Course 2', description: 'Description of Course 2' },
+  ];;
+
+  successMessage: string | null = null;  
+  errorMessage: string | null = null;
 
   displaySidebar(){
     this.isSidebar = !this.isSidebar;
@@ -60,9 +69,20 @@ export class StudentPageComponent implements OnInit{
       this.courses = course;
        // Check if the user is enrolled in any courses
        this.isEnrolled = this.courses.some(course =>
-        course.enrollments.some((enro: { user: any; }) => enro.user === this.id) // Replace `this.id` with your actual user ID variable
+        course.enrollments.some((enro: { user: any; }) => enro.user === this.id) 
       );
+      this.courses
+                .filter(course => 
+                  course.enrollments.some((enrollment: { user: any }) => enrollment.user === this.id)
+                )
+                .forEach(course => this.enrolledCourses?.push(course));
+                // Manually trigger change detection
+            this.cdr.detectChanges();
     })
+  }
+
+  isCourseEnrolled(cours: any): boolean {
+    return this.enrolledCourses.length > 0 && this.enrolledCourses.some(enrolled => enrolled._id === cours._id);
   }
 
   getAllAssignment(){
@@ -75,9 +95,15 @@ export class StudentPageComponent implements OnInit{
   getAllSubmission(){
     this.submissionService.getAllSubmissions().subscribe((submission: any[]) => {
       this.submissions = submission;
+      for(let mysub of this.submissions){
+        if(mysub.user._id == this.id){
+          this.numOfStudentSubmission ++;
+        }
+      }
       this.submissionLength = this.submissions.length;
     })
   }
+
 
   handleSubmission(course: any, assignment: any){
      // Change the action to show the submission form
@@ -96,7 +122,6 @@ export class StudentPageComponent implements OnInit{
     if (this.addSubmissionForm.valid) {
       // Extract form data
       const formData = this.addSubmissionForm.value;
-      console.log(formData)
   
       // Assume the assignment service has a method to submit the form
       this.submissionService.addSubmission({
@@ -126,14 +151,15 @@ export class StudentPageComponent implements OnInit{
 
   logout() {
     // Logic for clearing user session or token
-    console.log('Logging out...');
     localStorage.removeItem('firstname');
     localStorage.removeItem('lastname');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('id');
 
-    // Example: Redirect to login page after logging out
-    this.router.navigate(['/signin']);
+    this.successMessage = 'Logout Succesfully.';
+    setTimeout(() => this.successMessage = null, 1000)
+    this.errorMessage = null;
+    setTimeout(() => {this.router.navigate(['/signin'])}, 1100)
   }
 }

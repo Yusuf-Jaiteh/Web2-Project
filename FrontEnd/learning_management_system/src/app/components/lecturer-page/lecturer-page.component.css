@@ -292,6 +292,11 @@ ul {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
   }
+
+  .grade-assignment-card{
+    margin: 40px auto;
+    padding: 30px;
+  }
   
   .card-header {
     background-color: #0066cc;

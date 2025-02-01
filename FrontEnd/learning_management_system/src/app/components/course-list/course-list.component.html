@@ -2,6 +2,14 @@
     <div class="text-center">
       <h1>{{ role === 'Instructor' ? 'My Courses' : 'Available Courses' }}</h1>
     </div>
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+  </div>
+
   
     <!-- Instructor Courses -->
     <div *ngIf="role === 'Instructor'">
